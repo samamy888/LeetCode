@@ -1,0 +1,15 @@
+public class Solution {
+    public int SubtractProductAndSum(int n) {
+        string str = n.ToString();
+            int Produce = 1;
+            int Sum = 0;
+            int num;
+            for(int i = 0; i < str.Length; i++)
+            {
+                num = Convert.ToInt16(str[i])-48;
+                Produce *= num;
+                Sum += num;
+            }
+            return Produce - Sum;
+    }
+}
