@@ -1,0 +1,10 @@
+public class Solution {
+    public int XorOperation(int n, int start) {
+        int ans = start;
+        for(int i=1;i<n;i++){
+            int tmp = start+2*i;
+            ans = ans^tmp;
+        }
+        return ans;
+    }
+}

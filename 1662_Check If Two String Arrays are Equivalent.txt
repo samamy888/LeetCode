@@ -1,0 +1,13 @@
+public class Solution {
+    public bool ArrayStringsAreEqual(string[] word1, string[] word2) {
+        string worda = string.Empty;
+        string wordb = string.Empty;
+        for(int i=0;i<word1.Length;i++){
+            worda +=word1[i];
+        }
+        for(int i=0;i<word2.Length;i++){
+            wordb +=word2[i];
+        }
+        return worda==wordb;
+    }
+}
