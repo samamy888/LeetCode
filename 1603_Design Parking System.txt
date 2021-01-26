@@ -1,0 +1,30 @@
+一開始:
+
+public class ParkingSystem {    
+    
+    int[] array =new int[3];
+    public ParkingSystem(int big, int medium, int small) {
+        array[0] = big;
+        array[1] = medium;
+        array[2] = small;
+    }
+    
+    public bool AddCar(int carType) {
+        array[carType-1]--;
+        return array[carType-1]>=0;
+    }
+}
+
+修正後:
+
+public class ParkingSystem {    
+    
+    int[] array;
+    public ParkingSystem(int big, int medium, int small) {
+        array =new int[3]{big,medium,small};
+    }
+    
+    public bool AddCar(int carType) {
+        return --array[carType-1]>=0;
+    }
+}

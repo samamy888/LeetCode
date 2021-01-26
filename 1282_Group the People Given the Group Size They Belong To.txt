@@ -1,0 +1,52 @@
+一開始的解法:
+public class Solution {
+    public IList<IList<int>> GroupThePeople(int[] groupSizes) {
+        int min = 1;
+        int index = 1 ;
+        int length = groupSizes.Length;
+        IList<IList<int>> ans = new List<IList<int>>();
+        for(int i=1;i<= length;i++){
+            index = Array.FindIndex(groupSizes,x=>x==min);
+            if(index!=-1){
+                IList<int> first = new List<int>();
+                for(int j=0;j<min;j++){
+                    index = Array.FindIndex(groupSizes,x=>x==min);
+                    first.Add(index);
+                    groupSizes[index] = 0;
+                }
+                length -=min;
+                ans.Add(first);
+            }
+            if(Array.FindIndex(groupSizes,x=>x==min)!=-1){
+                i--;
+                continue;
+            }   
+            min = i+1;
+        }        
+        return ans;
+    }
+}
+改良後:
+public class Solution {
+    public IList<IList<int>> GroupThePeople(int[] groupSizes) {
+        IList<IList<int>> ans = new List<IList<int>>();
+        Dictionary<int,List<int>> map = new Dictionary<int,List<int>> ();
+        for(int i=0;i<groupSizes.Length;i++){
+            int key = groupSizes[i];
+            if(!map.ContainsKey(key)){
+                map.Add(key,new List<int>());
+                map[key].Add(i);
+            }   
+            else{
+                if(map[key].Count==key){
+                    ans.Add(map[key]);
+                    map[key] = new List<int>();
+                }
+                map[key].Add(i);
+            }                
+        }
+        foreach(var v in map.Values)
+            ans.Add(v);
+        return ans;
+    }
+}

@@ -1,0 +1,16 @@
+public class Solution {
+    public string Interpret(string command) {
+        string ans = string.Empty;
+        int length = command.Length;
+        for(int i=0;i<length;i++){
+            if((i+1)!=length && command[i]=='(' && command[i+1]==')'){
+                i++;
+                ans+='o';
+            }
+            if(command[i]=='(' || command[i]==')')
+                continue;
+            ans +=command[i];
+        }
+        return ans;
+    }
+}
