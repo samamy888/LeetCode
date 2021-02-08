@@ -1,0 +1,12 @@
+原本:
+public class Solution {
+    public int LargestAltitude(int[] gain) {
+        int num = 0;
+        int max = 0;
+        for(int i=0;i<gain.Length;i++){
+            num+=gain[i];
+            max = Math.Max(num,max);
+        }
+        return max;
+    }
+}

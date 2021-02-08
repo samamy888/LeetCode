@@ -1,0 +1,52 @@
+原本:
+public class Solution {
+    public int OddCells(int n, int m, int[][] indices) {
+        int [][] table = new int[n][];
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            table[i] = new int[m];  
+        }
+        for(int i=0;i<indices.Length;i++){
+            int x = indices[i][0];
+            int y = indices[i][1];
+            for(int j=0;j<table[x].Length;j++)
+                table[x][j]++;
+            for(int j=0;j<table.Length;j++)
+                table[j][y]++;                           
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(table[i][j]%2==1)    ans++;  
+            }
+        }
+        return ans;
+    }
+}
+改善後:
+public class Solution {
+    public int OddCells(int n, int m, int[][] indices) {
+        bool [][] table = new bool[n][];
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            table[i] = new bool[m];  
+        }
+        for(int i=0;i<indices.Length;i++){
+            int x = indices[i][0];
+            int y = indices[i][1];
+            for(int j=0;j<table[x].Length;j++){
+                table[x][j] = !table[x][j];
+            }
+            for(int j=0;j<table.Length;j++){
+                table[j][y] = !table[j][y];    
+            }
+                                       
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(table[i][j])    
+                    ans++;  
+            }
+        }
+        return ans;
+    }
+}

@@ -1,0 +1,22 @@
+原本:
+public class Solution {
+    int ans = 0;
+    public int NumberOfMatches(int n) {
+        MatchesResult(n);
+        return ans;
+    }
+    void MatchesResult(int n){
+        if(n==1) return;
+        int Matches = n/2;
+        ans += Matches;
+        MatchesResult(n-Matches);       
+    }
+     
+}
+查解答後發現的解法:
+public class Solution {
+    public int NumberOfMatches(int n) 
+    {
+	return n - 1;
+    }
+}

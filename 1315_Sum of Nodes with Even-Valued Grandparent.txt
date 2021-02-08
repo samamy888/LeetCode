@@ -1,0 +1,59 @@
+原本:
+public class Solution {
+    public int SumEvenGrandparent(TreeNode root) {          
+        return TreeNode_Deep_Get(root,root.val%2==0,false,0);
+    }
+    int TreeNode_Deep_Get(TreeNode node,bool FIsEven,bool GIsEven,int count = 0){
+        if(node==null)
+            return 0;
+        bool IsEven = node.val%2==0;
+        int left = TreeNode_Deep_Get(node.left,IsEven,FIsEven,count+1);
+        int right = TreeNode_Deep_Get(node.right,IsEven,FIsEven,count+1);
+        int ans = left+right;
+        if(GIsEven && count!=1)
+            ans += node.val;
+        return ans;
+    }
+
+}
+改後:
+public class Solution {
+    public int SumEvenGrandparent(TreeNode root) {  
+        bool[] IsEven = new bool[2]{root.val%2==0,false};
+        return TreeNode_Deep_Get(root,IsEven,0);
+    }
+    int TreeNode_Deep_Get(TreeNode node,bool[] IsEven,int count = 0){
+        if(node==null)
+            return 0;
+        bool[] NewIsEven = new bool[2]{
+            node.val%2==0,
+            IsEven[0]
+        };
+        int left = TreeNode_Deep_Get(node.left,NewIsEven,count+1);
+        int right = TreeNode_Deep_Get(node.right,NewIsEven,count+1);
+        int ans = left+right;
+        if(IsEven[1] && count!=1)
+            ans += node.val;
+        return ans;
+    }
+}
+
+public class Solution {
+    public int SumEvenGrandparent(TreeNode root) {  
+        return TreeNode_Deep_Get(root,1,0);
+    }
+    int TreeNode_Deep_Get(TreeNode node,int IsEven,int count = 0){
+        if(node==null)
+            return 0;
+        int left = TreeNode_Deep_Get(node.left,IsEven<<1,count+1);
+        int right = TreeNode_Deep_Get(node.right,IsEven<<1,count+1);
+        int ans = left+right;
+        if(IsEven==4 && count!=1)
+            ans += node.val;
+        return ans;
+    }
+}
+
+Debug:
+	Console.Write("Now Node = " + node.val + " , IsEven= " + IsEven );
+	Console.WriteLine(" , left = " + left + " , right = " + right + " , count = " + count);

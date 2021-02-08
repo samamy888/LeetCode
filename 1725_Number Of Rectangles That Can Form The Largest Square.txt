@@ -1,0 +1,18 @@
+public class Solution {
+    public int CountGoodRectangles(int[][] rectangles) {
+        List<int> list = new List<int>();
+        int Max = 0,ans = 0;
+        for(int i=0;i<rectangles.Length;i++){
+            list.Add(Math.Min(rectangles[i][0],rectangles[i][1]));
+        }
+        list.ForEach(x=>{
+            if(x>Max) 
+                Max = x;
+        });
+        list.ForEach(x=>{
+            if(x==Max) 
+               ans++;
+        });
+        return ans;
+    }
+}

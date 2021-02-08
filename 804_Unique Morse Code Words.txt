@@ -1,0 +1,15 @@
+原本:
+public class Solution {
+    string[] MorseCode =new string[26] {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+    public int UniqueMorseRepresentations(string[] words) {
+        SortedSet<string> list = new SortedSet<string>();
+        for(int i=0;i<words.Length;i++){
+            string word = String.Empty;
+            for(int j=0;j<words[i].Length;j++){
+                word+=MorseCode[words[i][j]-97];
+            }
+            list.Add(word);
+        }
+        return list.Count;
+    }
+}

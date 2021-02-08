@@ -1,0 +1,13 @@
+原本:
+public class Solution {
+    public int[][] FlipAndInvertImage(int[][] A) {
+        int [][] ans = new int[A.Length][];
+        for(int i=0;i<A.Length;i++){
+            ans[i] = new int[A[i].Length];
+            for(int j=0;j<A[i].Length;j++){
+                ans[i][j] = ( A[i][A[i].Length-j-1] + 1 )%2;
+            }
+        }
+        return ans;
+    }
+}

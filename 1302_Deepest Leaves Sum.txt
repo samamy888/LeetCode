@@ -1,0 +1,53 @@
+原本:
+public class Solution {
+    private int max = 0;
+    public int DeepestLeavesSum(TreeNode root) {
+        Max_Get(root,0);
+        return Sum_Of_Deep(root,0);
+    }
+    void Max_Get(TreeNode node,int count){
+         if(node==null){
+            if(max<=count) max = count;
+             return;
+        } 
+        count++;
+        Max_Get(node.left,count);
+        Max_Get(node.right,count);
+    }
+    int Sum_Of_Deep(TreeNode node,int count){
+        if(node==null){
+            return 0;
+        } 
+        count++;
+        int left = Sum_Of_Deep(node.left,count);
+        int right = Sum_Of_Deep(node.right,count);
+        int ans = left+right;
+        if(max==count)
+            ans +=node.val;
+        return ans;
+    }
+
+}
+改完:
+public class Solution {
+    private int max = 0;
+    Dictionary<int,int> map = new Dictionary<int,int>();
+    public int DeepestLeavesSum(TreeNode root) {
+        Sum_Of_Deep(root,0);
+        return map[max];
+    }
+    void Sum_Of_Deep(TreeNode node,int count){
+        if(node==null){
+            if(max<=count) max = count;
+            return;
+        } 
+        count++;
+        Sum_Of_Deep(node.left,count);
+        Sum_Of_Deep(node.right,count);
+        if(map.ContainsKey(count))
+            map[count] = map[count]+node.val;
+        else
+            map.Add(count,node.val);
+    }
+
+}
